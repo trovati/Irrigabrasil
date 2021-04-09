@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CriarClienteDto } from './dto/criar-cliente.dto';
 import { Cliente } from './interface/cliente.interface';
@@ -16,6 +16,13 @@ export class ClientesController {
     async listaClientes(): Promise<Cliente[]> {
         return this.clienteService.listaClientes();
     }
+
+    @Get('/:name')
+    async pesquisarCliente(@Param('name') name:string): Promise<Cliente[] | Cliente> {
+        return this.clienteService.pesquisarCliente(name)
+    }
+
+    
 
 
 }
