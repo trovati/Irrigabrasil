@@ -3,7 +3,7 @@ import { ClientesService } from './clientes.service';
 import { CriarClienteDto } from './dto/criar-cliente.dto';
 import { Cliente } from './interface/cliente.interface';
 
-@Controller('irriga/v1/clientes')
+@Controller('api/v1/clientes')
 export class ClientesController {
     constructor(private readonly clienteService: ClientesService) {}
 
