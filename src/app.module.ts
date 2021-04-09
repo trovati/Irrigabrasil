@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admin:salmos23@irriga.krzdn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      'mongodb+srv://admin:irriga@irriga.krzdn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     ),
     ClientesModule,
     ProdutosModule,
