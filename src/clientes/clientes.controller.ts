@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CriarClienteDto } from './dto/criar-cliente.dto';
 import { Cliente } from './interface/cliente.interface';
@@ -8,6 +8,7 @@ export class ClientesController {
     constructor(private readonly clienteService: ClientesService) {}
 
     @Post()
+    @UsePipes(ValidationPipe)
     async criarCliente(@Body() criarClienteDto: CriarClienteDto): Promise<Cliente> {
         return this.clienteService.criarCliente(criarClienteDto)
     }
@@ -17,19 +18,21 @@ export class ClientesController {
         return this.clienteService.listaClientes();
     }
 
-    @Get('/:name')
-    async pesquisarCliente(@Param('name') name:string): Promise<Cliente[] | Cliente> {
-        return this.clienteService.pesquisarCliente(name)
+    @Get('/:_id')
+    async pesquisarCliente(@Param('_id') _id:string): Promise<Cliente[] | Cliente> {
+        return this.clienteService.pesquisarCliente(_id)
     }
 
-    @Put('/:name')
-    async atualizarCliente(@Body() criarClienteDto: CriarClienteDto, @Param('name') name:string): Promise<void> {
-        await this.clienteService.atualizarCliente(name, criarClienteDto);
+    @Put('/:_id')
+    @UsePipes(ValidationPipe)
+    async atualizarCliente(@Body() criarClienteDto: CriarClienteDto, @Param('_id') _id:string): Promise<void> {
+        await this.clienteService.atualizarCliente(_id, criarClienteDto);
     }
 
-    @Delete('/:name')
-    async deletarCliente(@Param('name') name:string): Promise<void>{
-        await this.clienteService.deletarCliente(name)
+    @Delete('/:_id')
+    @UsePipes(ValidationPipe)
+    async deletarCliente(@Param('_id') _id:string): Promise<void>{
+        await this.clienteService.deletarCliente(_id)
     }
 
     
