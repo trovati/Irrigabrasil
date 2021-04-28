@@ -6,7 +6,6 @@ export const PedidoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cliente"
     }],
-
     produto: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Produto"

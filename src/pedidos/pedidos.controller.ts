@@ -15,10 +15,7 @@ export class PedidosController {
 
   @Put('/:_id')
   @UsePipes(ValidationPipe)
-  async atualizarPedido(
-    @Body() criarPedidoDto: CriarPedidoDto,
-    @Param('_id') _id: string,
-  ): Promise<Pedido> {
+  async atualizarPedido(@Body() criarPedidoDto: CriarPedidoDto,@Param('_id') _id: string): Promise<Pedido> {
     return await this.pedidosService.atualizarPedido(_id, criarPedidoDto);
   }
 
@@ -34,9 +31,7 @@ export class PedidosController {
 
   @Delete('/:_id')
   @UsePipes(ValidationPipe)
-  async deletarPedido(
-    @Param('_id') _id: string,
-  ): Promise<void> {
+  async deletarPedido(@Param('_id') _id: string): Promise<void> {
     await this.pedidosService.deletarPedido(_id);
   }
 }
