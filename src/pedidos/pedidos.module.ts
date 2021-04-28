@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PedidoSchema } from './interface/pedido.schema';
 
 @Module({
+  
   imports: [
     MongooseModule.forFeature([{ name: 'Pedido', schema: PedidoSchema }]),
   ],

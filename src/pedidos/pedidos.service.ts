@@ -22,18 +22,13 @@ export class PedidosService {
     return await pedidoCriado.save();
   }
 
-  async atualizarPedido(
-    _id: string,
-    criarPedidoDto: CriarPedidoDto,
-  ): Promise<Pedido> {
+  async atualizarPedido(_id: string,criarPedidoDto: CriarPedidoDto,): Promise<Pedido> {
     const pedidoEncontrado = await this.pedidoModel.findOne({ _id }).exec();
 
     if (!pedidoEncontrado) {
       throw new NotFoundException(`Pedido ${_id} não encontrado`);
     }
-    return await this.pedidoModel
-      .findOneAndUpdate({ _id }, { $set: criarPedidoDto })
-      .exec();
+    return await this.pedidoModel.findOneAndUpdate({ _id }, { $set: criarPedidoDto }).exec();
   }
 
   async listarPedidos(): Promise<Pedido[]> {
