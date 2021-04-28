@@ -23,13 +23,13 @@ export class ClientesService {
     return await clienteCriado.save();
   }
 // Atualizar um cliente existente
-  async atualizarCliente(name: string, criarClienteDto: CriarClienteDto): Promise<Cliente> {
-    const clienteEncontrado = await this.clienteModel.findOne({name}).exec();
+  async atualizarCliente(_id: string, criarClienteDto: CriarClienteDto): Promise<Cliente> {
+    const clienteEncontrado = await this.clienteModel.findOne({_id}).exec();
 
     if(!clienteEncontrado){
-      throw new NotFoundException(`Cliente ${name} não foi encontrado`)
+      throw new NotFoundException(`Cliente ${_id} não foi encontrado`)
     }
-    return await this.clienteModel.findOneAndUpdate({name}, {$set:criarClienteDto},).exec();
+    return await this.clienteModel.findOneAndUpdate({_id}, {$set:criarClienteDto},).exec();
   }
   // Lista de Todos os Clientes
 
@@ -39,22 +39,22 @@ export class ClientesService {
 
   // Consultar um Cliente
 
-  async pesquisarCliente(name:string): Promise<Cliente>{
-    const clienteEncontrado = await this.clienteModel.findOne({name}).exec();
+  async pesquisarCliente(_id:string): Promise<Cliente>{
+    const clienteEncontrado = await this.clienteModel.findOne({_id}).exec();
     if(!clienteEncontrado){
-      throw new NotFoundException(`Cliente ${name} não encontrado`);
+      throw new NotFoundException(`Cliente ${_id} não encontrado`);
     }
     return clienteEncontrado;
   }
 
   //Deletar Cliente
 
-  async deletarCliente(name): Promise<any> {
-    const clienteEncontrado = await this.clienteModel.findOne({name}).exec();
+  async deletarCliente(_id): Promise<any> {
+    const clienteEncontrado = await this.clienteModel.findOne({_id}).exec();
     if (!clienteEncontrado){
-      throw new NotFoundException(`Não foi possível deletar o cliente ${name}, pois não se encontra no banco de dados`)
+      throw new NotFoundException(`Não foi possível deletar o cliente ${_id}, pois não se encontra no banco de dados`)
     }
-    return this.clienteModel.deleteOne({name}).exec();
+    return this.clienteModel.deleteOne({_id}).exec();
   }
 
 

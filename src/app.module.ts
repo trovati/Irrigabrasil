@@ -7,12 +7,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admin:irriga@irriga.jj85e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      'mongodb+srv://admin:irriga@irrigabrasil.4dsfi.mongodb.net/IrrigaBrasil?retryWrites=true&w=majority',
       {
-        useCreateIndex:true,
+        useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
-      }
+      },
     ),
     ClientesModule,
     ProdutosModule,

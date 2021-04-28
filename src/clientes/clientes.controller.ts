@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPi
 import { ClientesService } from './clientes.service';
 import { CriarClienteDto } from './dto/criar-cliente.dto';
 import { Cliente } from './interface/cliente.interface';
+import { ClienteValidacaoPipe } from './pipes/validation';
 
 @Controller('api/v1/clientes')
 export class ClientesController {
@@ -19,19 +20,19 @@ export class ClientesController {
     }
 
     @Get('/:_id')
-    async pesquisarCliente(@Param('_id') _id:string): Promise<Cliente[] | Cliente> {
+    async pesquisarCliente(@Param('_id', ClienteValidacaoPipe) _id:string): Promise<Cliente[] | Cliente> {
         return this.clienteService.pesquisarCliente(_id)
     }
 
     @Put('/:_id')
     @UsePipes(ValidationPipe)
-    async atualizarCliente(@Body() criarClienteDto: CriarClienteDto, @Param('_id') _id:string): Promise<void> {
+    async atualizarCliente(@Body() criarClienteDto: CriarClienteDto, @Param('_id', ClienteValidacaoPipe) _id:string): Promise<void> {
         await this.clienteService.atualizarCliente(_id, criarClienteDto);
     }
 
     @Delete('/:_id')
     @UsePipes(ValidationPipe)
-    async deletarCliente(@Param('_id') _id:string): Promise<void>{
+    async deletarCliente(@Param('_id', ClienteValidacaoPipe) _id:string): Promise<void>{
         await this.clienteService.deletarCliente(_id)
     }
 
